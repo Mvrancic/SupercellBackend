@@ -1,0 +1,14 @@
+const LecturasRFID = require('../models/lecturasRFIDModel');
+
+// Controlador para obtener todas las lecturas RFID
+exports.getAllLecturas = async (req, res) => {
+  try {
+    console.log("Fetching lecturas RFID...");
+    const lecturas = await LecturasRFID.find();
+    console.log("Lecturas RFID obtenidas:", lecturas);
+    res.json(lecturas);
+  } catch (err) {
+    console.error("Error al obtener lecturas RFID:", err.message);
+    res.status(500).json({ message: err.message });
+  }
+};

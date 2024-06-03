@@ -1,0 +1,11 @@
+const Example = require('../models/exampleModel');
+
+// Controlador para obtener todos los ejemplos
+exports.getAllExamples = async (req, res) => {
+  try {
+    const examples = await Example.find();
+    res.json(examples);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
