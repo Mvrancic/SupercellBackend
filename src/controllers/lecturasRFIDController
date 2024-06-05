@@ -1,14 +1,31 @@
 const LecturasRFID = require('../models/lecturasRFIDModel');
 
-// Controlador para obtener todas las lecturas RFID
-exports.getAllLecturas = async (req, res) => {
+// Controlador para agregar una nueva tarjeta RFID
+exports.agregarTarjeta = async (req, res) => {
   try {
-    console.log("Fetching lecturas RFID...");
-    const lecturas = await LecturasRFID.find();
-    console.log("Lecturas RFID obtenidas:", lecturas);
-    res.json(lecturas);
+    const { tarjeta_id, tipo, acceso, lector_id, timestamp } = req.body;
+
+    // Verificar si la tarjeta ya existe en la base de datos
+    const existeTarjeta = await LecturasRFID.findOne({ tarjeta_id });
+    if (existeTarjeta) {
+      return res.status(400).json({ message: 'La tarjeta RFID ya existe' });
+    }
+
+    // Crear un nuevo documento de lectura RFID
+    const nuevaTarjeta = new LecturasRFID({
+      tarjeta_id,
+      tipo,
+      acceso,
+      lector_id,
+      timestamp
+    });
+
+    // Guardar la nueva tarjeta RFID en la base de datos
+    await nuevaTarjeta.save();
+
+    res.status(201).json({ message: 'Tarjeta RFID agregada correctamente' });
   } catch (err) {
-    console.error("Error al obtener lecturas RFID:", err.message);
-    res.status(500).json({ message: err.message });
-  }
+    console.error('Error al agregar tarjeta RFID:', err.message);
+    res.status(500).json({ message: err.message });
+  }
 };

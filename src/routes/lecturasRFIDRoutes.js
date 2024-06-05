@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const lecturasRFIDController = require('../controllers/lecturasRFIDController');
 
-// Define la ruta y asocia el controlador para obtener todas las lecturas RFID
-router.get('/', lecturasRFIDController.getAllLecturas);
+// Ruta para agregar una nueva tarjeta RFID
+router.post('/agregar_tarjeta', lecturasRFIDController.agregarTarjeta);
 
-module.exports = router;
+module.exports = router;
