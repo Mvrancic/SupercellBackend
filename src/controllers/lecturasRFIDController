@@ -1,5 +1,24 @@
 const LecturasRFID = require('../models/lecturasRFIDModel');
 
+// Controlador para agregar una nueva tarjeta RFID
+exports.agregarTarjeta = async (req, res) => {
+  try {
+    const nuevaTarjeta = new LecturasRFID({
+      tarjeta_id: req.body.tarjeta_id,
+      tipo: req.body.tipo,
+      acceso: req.body.acceso,
+      lector_id: req.body.lector_id,
+      timestamp: req.body.timestamp
+    });
+
+    const tarjetaGuardada = await nuevaTarjeta.save();
+    res.status(201).json(tarjetaGuardada);
+  } catch (err) {
+    console.error('Error al agregar tarjeta RFID:', err.message);
+    res.status(500).json({ message: err.message });
+  }
+};
+
 // Controlador para obtener el último ID de tarjeta RFID registrado
 exports.getUltimoIdTarjeta = async (req, res) => {
   try {
