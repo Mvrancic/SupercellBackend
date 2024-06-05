@@ -20,6 +20,7 @@ exports.agregarTarjeta = async (req, res) => {
 };
 
 // Controlador para obtener el último ID de tarjeta RFID registrado
+// Controlador para obtener el último ID de tarjeta RFID registrado
 exports.getUltimoIdTarjeta = async (req, res) => {
   try {
     const ultimaTarjeta = await LecturasRFID.findOne().sort({ timestamp: -1 });
@@ -36,5 +37,4 @@ exports.getUltimoIdTarjeta = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
-
 
