@@ -1,5 +1,5 @@
 // Ejemplo en lecturasRFIDController.js
-exports.getUltimoIdTarjeta = async (req, res) => {
+export async function getUltimoIdTarjeta(req, res) {
   try {
     console.log('Buscando la última tarjeta RFID...');
     const ultimaTarjeta = await lecturasRFID.findOne().sort({ timestamp: -1 });
@@ -17,4 +17,4 @@ exports.getUltimoIdTarjeta = async (req, res) => {
     console.error('Error al obtener el último ID de tarjeta RFID:', err.message);
     res.status(500).json({ message: err.message });
   }
-};
+}

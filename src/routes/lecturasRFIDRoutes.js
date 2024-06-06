@@ -1,7 +1,7 @@
-const express = require('express');
-const router = express.Router();
-const lecturasRFIDController = require('../controllers/lecturasRFIDController');
+import { Router } from 'express';
+const router = Router();
+import { getUltimoIdTarjeta } from '../controllers/lecturasRFIDController';
 
-router.get('/ultimoId', lecturasRFIDController.getUltimoIdTarjeta);
+router.get('/ultimoId', getUltimoIdTarjeta);
 
-module.exports = router;
+export default router;

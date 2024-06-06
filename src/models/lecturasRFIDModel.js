@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import { Schema, model } from 'mongoose';
 
-const lecturaRFIDSchema = new mongoose.Schema({
+const lecturaRFIDSchema = new Schema({
   tarjeta_id: {
     type: String,
     required: true
@@ -21,6 +21,6 @@ const lecturaRFIDSchema = new mongoose.Schema({
   }
 });
 
-const LecturasRFID = mongoose.model('LecturasRFID', lecturaRFIDSchema);
+const LecturasRFID = model('LecturasRFID', lecturaRFIDSchema);
 
-module.exports = LecturasRFID;
+export default LecturasRFID;

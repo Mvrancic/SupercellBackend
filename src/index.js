@@ -1,19 +1,19 @@
-const express = require('express');
-const cors = require('cors');
-const connectDB = require('./config/db');
-const { port } = require('./config/appConfig');
+import express, { json } from 'express';
+import cors from 'cors';
+import connectDB from './config/db';
+import { port } from './config/appConfig';
 
 const app = express();
 
 // Middleware
 app.use(cors());
-app.use(express.json());
+app.use(json());
 
 // Conectar a MongoDB
 connectDB();
 
 // Rutas
-const lecturasRFIDRoutes = require('./routes/lecturasRFIDRoutes');
+import lecturasRFIDRoutes from './routes/lecturasRFIDRoutes';
 app.use('/api', lecturasRFIDRoutes);
 
 // Iniciar el servidor
