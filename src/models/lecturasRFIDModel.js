@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+const { Schema, model } = require('mongoose');
 
 const lecturaRFIDSchema = new Schema({
   tarjeta_id: {
@@ -23,4 +23,4 @@ const lecturaRFIDSchema = new Schema({
 
 const LecturasRFID = model('LecturasRFID', lecturaRFIDSchema);
 
-export default LecturasRFID;
+module.exports = LecturasRFID;

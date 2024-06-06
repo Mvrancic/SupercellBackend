@@ -1,8 +1,9 @@
-import express, { json } from 'express';
-import cors from 'cors';
-import connectDB from './config/db';
-import { port } from './config/appConfig';
-
+const express = require('express');
+const cors = require('cors');
+const connectDB = require('./config/db');
+const { port } = require('./config/appConfig');
+const lecturasRFIDRoutes = require('./routes/lecturasRFIDRoutes');
+const { json } = require('express');
 const app = express();
 
 // Middleware
@@ -13,7 +14,7 @@ app.use(json());
 connectDB();
 
 // Rutas
-import lecturasRFIDRoutes from './routes/lecturasRFIDRoutes';
+
 app.use('/api', lecturasRFIDRoutes);
 
 // Iniciar el servidor
