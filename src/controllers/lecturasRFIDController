@@ -8,7 +8,7 @@ exports.agregarTarjeta = async (req, res) => {
       tipo: req.body.tipo,
       acceso: req.body.acceso,
       lector_id: req.body.lector_id,
-      timestamp: req.body.timestamp
+      timestamp: new Date()  // Utiliza new Date() para obtener la fecha y hora actual
     });
 
     const tarjetaGuardada = await nuevaTarjeta.save();
@@ -20,16 +20,18 @@ exports.agregarTarjeta = async (req, res) => {
 };
 
 // Controlador para obtener el último ID de tarjeta RFID registrado
-// Controlador para obtener el último ID de tarjeta RFID registrado
 exports.getUltimoIdTarjeta = async (req, res) => {
   try {
+    console.log('Buscando la última tarjeta RFID...');
     const ultimaTarjeta = await LecturasRFID.findOne().sort({ timestamp: -1 });
 
     if (!ultimaTarjeta) {
+      console.log('No se encontraron tarjetas RFID registradas');
       return res.status(404).json({ message: 'No se encontraron tarjetas RFID registradas' });
     }
 
-    console.log('Última tarjeta RFID encontrada:', ultimaTarjeta); // Agrega este log para verificar
+    console.log('Última tarjeta RFID encontrada:', ultimaTarjeta);
+    console.log('Último ID de tarjeta RFID:', ultimaTarjeta.tarjeta_id);
 
     res.json({ ultimo_id_tarjeta: ultimaTarjeta.tarjeta_id });
   } catch (err) {
@@ -37,4 +39,3 @@ exports.getUltimoIdTarjeta = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
-
