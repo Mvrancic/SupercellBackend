@@ -11,6 +11,6 @@ const lecturaRFIDSchema = new Schema({
   }
 });
 
-const LecturasRFID = model('LecturasRFID', lecturaRFIDSchema);
+const lecturasRFID = model('LecturasRFID', lecturaRFIDSchema);
 
-module.exports = LecturasRFID;
+module.exports = lecturasRFID;
