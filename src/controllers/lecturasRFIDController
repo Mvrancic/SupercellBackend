@@ -2,26 +2,23 @@ const mongoose = require('mongoose');
 const LecturasRFID = require('../models/lecturasRFIDModel');
 
 
-// Ejemplo en lecturasRFIDController.js
 exports.getUltimoIdTarjeta = async (req, res) => {
   try {
     console.log('Buscando la última tarjeta RFID...');
-    const todasLasTarjetas = await LecturasRFID.find();
+    const ultimaTarjeta = await LecturasRFID.find().sort({timestamp: -1}).limit(1);
 
     console.log('Colección que se está intentando leer: lecturasRFID');
-    console.log('Contenidos de la colección:', todasLasTarjetas);
+    console.log('Contenidos de la colección:', ultimaTarjeta);
 
-    const ultimaTarjeta = todasLasTarjetas[0];
-
-    if (!ultimaTarjeta) {
+    if (!ultimaTarjeta.length) {
       console.log('No se encontraron tarjetas RFID registradas');
       return res.status(404).json({ message: 'No se encontraron tarjetas RFID registradas' });
     }
 
-    console.log('Última tarjeta:', ultimaTarjeta);
+    console.log('Última tarjeta:', ultimaTarjeta[0]);
 
     // Enviar el tarjeta_id como respuesta
-    res.json({ tarjeta_id: ultimaTarjeta.tarjeta_id });
+    res.json({ tarjeta_id: ultimaTarjeta[0].tarjeta_id });
   } catch (err) {
     console.error('Error al buscar la última tarjeta RFID:', err);
     res.status(500).json({ message: 'Error al buscar la última tarjeta RFID' });
