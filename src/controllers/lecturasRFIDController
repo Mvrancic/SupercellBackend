@@ -1,3 +1,7 @@
+const mongoose = require('mongoose');
+const lecturasRFID = require('../models/lecturasRFIDModel');
+
+
 // Ejemplo en lecturasRFIDController.js
 exports.getUltimoIdTarjeta = async (req, res) => {
   try {
