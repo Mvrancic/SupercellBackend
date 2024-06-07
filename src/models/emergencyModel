@@ -1,0 +1,11 @@
+
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
+
+const emergencySchema = new Schema({
+  lockdown: { type: Boolean, default: false },
+});
+
+const Emergency = mongoose.model('Emergencia', emergencySchema, 'lockdown');
+
+module.exports = Emergency;

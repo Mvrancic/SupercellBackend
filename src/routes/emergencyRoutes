@@ -1,0 +1,7 @@
+const { Router } = require('express');
+const router = Router();
+const { setEmergency } = require('../controllers/emergencyController');
+
+router.get('/emergency_lockdown', setEmergency);
+
+module.exports = router;
