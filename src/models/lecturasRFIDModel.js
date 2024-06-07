@@ -12,6 +12,6 @@ const lecturaRFIDSchema = new Schema({
   }
 });
 
-const lecturasRFID = model('LecturasRFID', lecturaRFIDSchema);
+const lecturasRFID = mongoose.model('LecturasRFID', lecturaRFIDSchema, 'lecturasRFID');
 
 module.exports = lecturasRFID;

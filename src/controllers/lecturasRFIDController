@@ -8,8 +8,8 @@ exports.getUltimoIdTarjeta = async (req, res) => {
     const ultimaTarjeta = await LecturasRFID.find().sort({timestamp: -1}).limit(1);
 
     console.log('Colección que se está intentando leer: lecturasRFID');
-    console.log('Contenidos de la colección:', ultimaTarjeta);
-
+    const contenidos = await LecturasRFID.find();
+    console.log('Contenidos de la colección:', contenidos);
     if (!ultimaTarjeta) {
       console.log('No se encontraron tarjetas RFID registradas');
       return res.status(404).json({ message: 'No se encontraron tarjetas RFID registradas' });
