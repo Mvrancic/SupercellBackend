@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
-const lecturasRFID = require('../models/lecturasRFIDModel');
+const LecturasRFID = require('../models/lecturasRFIDModel');
 
 
 // Ejemplo en lecturasRFIDController.js
 exports.getUltimoIdTarjeta = async (req, res) => {
   try {
     console.log('Buscando la última tarjeta RFID...');
-    const todasLasTarjetas = await lecturasRFID.find().sort({_id: -1});
+    const todasLasTarjetas = await LecturasRFID.find();
 
     console.log('Colección que se está intentando leer: lecturasRFID');
     console.log('Contenidos de la colección:', todasLasTarjetas);
