@@ -14,7 +14,6 @@ app.use(json());
 connectDB();
 
 // Rutas
-
 app.use('/api', lecturasRFIDRoutes);
 
 // Iniciar el servidor
