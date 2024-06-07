@@ -6,19 +6,24 @@ const lecturasRFID = require('../models/lecturasRFIDModel');
 exports.getUltimoIdTarjeta = async (req, res) => {
   try {
     console.log('Buscando la última tarjeta RFID...');
-    const ultimaTarjeta = await lecturasRFID.findOne();
+    const todasLasTarjetas = await lecturasRFID.find().sort({_id: -1});
+
+    console.log('Colección que se está intentando leer: lecturasRFID');
+    console.log('Contenidos de la colección:', todasLasTarjetas);
+
+    const ultimaTarjeta = todasLasTarjetas[0];
 
     if (!ultimaTarjeta) {
       console.log('No se encontraron tarjetas RFID registradas');
       return res.status(404).json({ message: 'No se encontraron tarjetas RFID registradas' });
     }
 
-    console.log('Última tarjeta RFID encontrada:', ultimaTarjeta);
-    console.log('Último ID de tarjeta RFID:', ultimaTarjeta.tarjeta_id);
+    console.log('Última tarjeta:', ultimaTarjeta);
 
-    res.json({ ultimo_id_tarjeta: ultimaTarjeta.tarjeta_id });
+    // Enviar el tarjeta_id como respuesta
+    res.json({ tarjeta_id: ultimaTarjeta.tarjeta_id });
   } catch (err) {
-    console.error('Error al obtener el último ID de tarjeta RFID:', err.message);
-    res.status(500).json({ message: err.message });
+    console.error('Error al buscar la última tarjeta RFID:', err);
+    res.status(500).json({ message: 'Error al buscar la última tarjeta RFID' });
   }
 };
