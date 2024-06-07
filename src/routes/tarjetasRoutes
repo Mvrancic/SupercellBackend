@@ -1,0 +1,7 @@
+const { Router } = require('express');
+const router = Router();
+const { agregarTarjeta } = require('../controllers/tarjetasController');
+
+router.post('/agregar_tarjeta', agregarTarjeta);
+
+module.exports = router;
