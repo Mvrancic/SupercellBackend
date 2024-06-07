@@ -1,0 +1,25 @@
+const mongoose = require('mongoose');
+const { Schema, model } = mongoose;
+
+const RegistrosSchema = new Schema({
+  tarjeta_id: {
+    type: String,
+    required: true
+  },
+  tipo_tarjeta: {
+    type: String,
+    required: true
+  },
+  timestamp: {
+    type: String,
+    required: true
+  },
+  access_result: {
+    type: String,
+    required: true
+  }
+});
+
+const registros = mongoose.model('Registros', RegistrosSchema, 'registros');
+
+module.exports = registros;

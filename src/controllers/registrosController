@@ -1,0 +1,10 @@
+const Registros = require('../models/registrosModel');
+
+exports.getAllRegistros = async (req, res) => {
+  try {
+    const registros = await Registros.find();
+    res.status(200).json(registros);
+  } catch (error) {
+    res.status(500).json({ message: 'Error al obtener los registros', error });
+  }
+};

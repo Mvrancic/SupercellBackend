@@ -4,6 +4,7 @@ const connectDB = require('./config/db');
 const { port } = require('./config/appConfig');
 const lecturasRFIDRoutes = require('./routes/lecturasRFIDRoutes');
 const tarjetasRoutes = require('./routes/tarjetasRoutes');
+const registrosRoutes = require('./routes/registrosRoutes');
 const { json } = require('express');
 const app = express();
 
@@ -17,6 +18,7 @@ connectDB();
 // Rutas
 app.use('/api', lecturasRFIDRoutes);
 app.use('/api', tarjetasRoutes);
+app.use('/api', registrosRoutes);
 
 // Iniciar el servidor
 app.listen(port, () => {

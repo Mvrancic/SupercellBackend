@@ -1,0 +1,7 @@
+const { Router } = require('express');
+const router = Router();
+const { getAllRegistros } = require('../controllers/registrosController');
+
+router.get('/show_records', getAllRegistros);
+
+module.exports = router;
