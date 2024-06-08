@@ -10,3 +10,12 @@ exports.setEmergency = async (req, res) => {
     res.status(500).json({ message: 'Error al actualizar el estado de lockdown', error });
   }
 };
+
+exports.getEmergency = async (req, res) => {
+  try {
+    const emergency = await emergencyModel.findOne();
+    res.status(200).json(emergency);
+  } catch (error) {
+    res.status(500).json({ message: 'Error al obtener el estado de lockdown', error });
+  }
+};

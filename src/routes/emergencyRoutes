@@ -1,7 +1,9 @@
 const { Router } = require('express');
 const router = Router();
 const { setEmergency } = require('../controllers/emergencyController');
+const { getEmergency } = require('../controllers/emergencyController');
 
-router.get('/emergency_lockdown', setEmergency);
+router.post('/emergency_lockdown', setEmergency);
+router.get('/emergency_lockdown', getEmergency);
 
 module.exports = router;
