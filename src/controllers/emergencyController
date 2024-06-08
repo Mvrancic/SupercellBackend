@@ -4,7 +4,13 @@ const emergencyModel = require('../models/emergencyModel');
 exports.setEmergency = async (req, res) => {
   try {
     const { lockdown } = req.body;
-    const update = await emergencyModel.findOneAndUpdate({}, { lockdown }, { new: true });
+    let emergency = await emergencyModel.findOne({});
+    if (!emergency) {
+      emergency = new emergencyModel({ lockdown });
+    } else {
+      emergency.lockdown = lockdown;
+    }
+    const update = await emergency.save();
     res.status(200).json(update);
   } catch (error) {
     res.status(500).json({ message: 'Error al actualizar el estado de lockdown', error });
