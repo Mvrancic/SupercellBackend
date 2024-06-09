@@ -3,11 +3,11 @@ const emergencyModel = require('../models/emergencyModel');
 
 exports.setEmergency = async (req, res) => {
   try {
-    const { lockdown } = req.body;
+    const { lockdown, started, id } = req.body;
 
     if (lockdown) {
       // Si se activa un lockdown, crea un nuevo documento lockdown
-      const emergency = new emergencyModel({ lockdown });
+      const emergency = new emergencyModel({ lockdown, started, id });
       const update = await emergency.save();
       res.status(200).json(update);
     } else {
