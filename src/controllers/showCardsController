@@ -1,6 +1,6 @@
 const cards = require('../models/tarjetasModel');
 
-exports.getAllCrads = async (req, res) => {
+exports.getAllCards = async (req, res) => {
   try {
     const tarjetas = await cards.find();
     res.status(200).json(tarjetas);
