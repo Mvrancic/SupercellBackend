@@ -6,6 +6,7 @@ const lecturasRFIDRoutes = require('./routes/lecturasRFIDRoutes');
 const tarjetasRoutes = require('./routes/tarjetasRoutes');
 const registrosRoutes = require('./routes/registrosRoutes');
 const emergencyRoutes = require('./routes/emergencyRoutes');
+const showCardsROutes = require('./routes/showCardsRoutes');
 const { json } = require('express');
 const app = express();
 
@@ -21,6 +22,7 @@ app.use('/api', lecturasRFIDRoutes);
 app.use('/api', emergencyRoutes);
 app.use('/api', tarjetasRoutes);
 app.use('/api', registrosRoutes);
+app.use('/api', showCardsROutes);
 
 // Iniciar el servidor
 app.listen(port, () => {

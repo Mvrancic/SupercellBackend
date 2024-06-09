@@ -9,7 +9,7 @@ const lecturaRFIDSchema = new Schema({
 
   timestamp: {
     type: String,
-    required: true  // Define el campo timestamp como tipo Date
+    required: true
   }
 });
 

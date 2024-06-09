@@ -3,9 +3,11 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const emergencySchema = new Schema({
+  started: { type: Date, default: Date.now },
+  finished: { type: Date, default: null },
   lockdown: { type: Boolean, default: false },
 });
 
-const Emergency = mongoose.model('Emergencia', emergencySchema, 'lockdown');
+const Emergency = mongoose.model('Emergencia', emergencySchema, 'lockdowns');
 
 module.exports = Emergency;

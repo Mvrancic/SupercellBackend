@@ -4,14 +4,24 @@ const emergencyModel = require('../models/emergencyModel');
 exports.setEmergency = async (req, res) => {
   try {
     const { lockdown } = req.body;
-    let emergency = await emergencyModel.findOne({});
-    if (!emergency) {
-      emergency = new emergencyModel({ lockdown });
+
+    if (lockdown) {
+      // Si se activa un lockdown, crea un nuevo documento lockdown
+      const emergency = new emergencyModel({ lockdown });
+      const update = await emergency.save();
+      res.status(200).json(update);
     } else {
-      emergency.lockdown = lockdown;
+      // Si se desactiva un lockdown, actualiza el documento lockdown actual
+      const emergency = await emergencyModel.findOne({ lockdown: true });
+      if (emergency) {
+        emergency.lockdown = lockdown;
+        emergency.finished = Date.now();
+        const update = await emergency.save();
+        res.status(200).json(update);
+      } else {
+        res.status(404).json({ message: 'No se encontró un lockdown activo' });
+      }
     }
-    const update = await emergency.save();
-    res.status(200).json(update);
   } catch (error) {
     res.status(500).json({ message: 'Error al actualizar el estado de lockdown', error });
   }
@@ -19,8 +29,9 @@ exports.setEmergency = async (req, res) => {
 
 exports.getEmergency = async (req, res) => {
   try {
-    const emergency = await emergencyModel.findOne();
-    res.status(200).json(emergency);
+    // Obtiene todos los documentos lockdown, no solo el último
+    const emergencies = await emergencyModel.find();
+    res.status(200).json(emergencies);
   } catch (error) {
     res.status(500).json({ message: 'Error al obtener el estado de lockdown', error });
   }

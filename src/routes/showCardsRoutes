@@ -1,0 +1,7 @@
+const { Router } = require('express');
+const router = Router();
+const { getAllCards } = require('../controllers/showCardsController');
+
+router.get('/show_cards', getAllCards);
+
+module.exports = router;
