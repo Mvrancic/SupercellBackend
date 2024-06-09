@@ -3,9 +3,10 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const emergencySchema = new Schema({
-  started: { type: Date, default: Date.now },
-  finished: { type: Date, default: null },
+  started: { type: Date},
+  finished: { type: Date },
   lockdown: { type: Boolean, default: false },
+  id: { type: String, required: true },
 });
 
 const Emergency = mongoose.model('Emergencia', emergencySchema, 'lockdowns');
